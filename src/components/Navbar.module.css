@@ -1,0 +1,18 @@
+.nav {
+    grid-area: n;
+    background-color: green;
+}
+.item {
+    color: #fff;
+    margin: 25px 25px;     
+    font-size: 20px;
+    transition: all .5s;
+}
+
+.item:hover {
+    color: gold;
+}
+
+/* .active {
+    color: gold;
+} */
