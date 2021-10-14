@@ -6,13 +6,11 @@
     color: #fff;
     margin: 25px 25px;     
     font-size: 20px;
-    transition: all .5s;
+    transition: all 1s;
 }
 
 .item:hover {
-    color: gold;
+    color: #ff6600;
+    cursor: pointer;
+    border-bottom: 1px solid #ff6600;
 }
-
-/* .active {
-    color: gold;
-} */
