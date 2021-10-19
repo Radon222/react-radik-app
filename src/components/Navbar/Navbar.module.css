@@ -6,8 +6,13 @@
 .item a{
     color: #fff;
     text-decoration: none;
+    transition: all .5s;
 }
 
 .item a.activeLink {
     color:  gold;
+}
+.item a:hover {
+    color: hotpink;
+    border-bottom: 2px solid hotpink;
 }
