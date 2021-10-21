@@ -8,7 +8,7 @@ import classes from './Dialogs.module.css';
 import Message from './Message/Message';
 
 const Dialogs = props => {
-  let state = props.store.getState().dialogsPage;
+  let state = props.dialogsPage;
 
   let dialogsElements = state.dialogs.map(el => (
     <DialogItem key={el.id} name={el.name} id={el.id} />
@@ -21,12 +21,12 @@ const Dialogs = props => {
   let newMessageBody = state.newMessageBody;
 
   let onSendMessageClick = () => {
-    props.store.dispatch(sendMessageAC());
+    props.sendMessage();
   };
 
   let onNewMessageChange = event => {
     let body = event.target.value;
-    props.store.dispatch(updateNewMessageBodyAC(body));
+    props.updateNewMessageBody(body);
   };
 
   return (
