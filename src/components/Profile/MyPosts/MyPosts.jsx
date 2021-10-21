@@ -1,5 +1,5 @@
 import React from 'react';
-import { addPostAC, updateNewPostTextAC } from '../../../redux/state';
+import { addPostAC, updateNewPostTextAC } from '../../../redux/profileReducer';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 
@@ -24,6 +24,7 @@ const MyPosts = props => {
       <h3>My Posts</h3>
       <div>
         <textarea
+          className={classes.textarea}
           onChange={onPostChange}
           ref={newPostElement}
           value={props.newPostText}
