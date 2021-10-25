@@ -10,4 +10,21 @@
 }
 .selectedPage {
     font-weight: bold;
+    padding: 0px 10px;
+    margin: 5px;
+    border: 1px solid rgb(25, 104, 23);
+    border-radius: 20%;
+    cursor: pointer;
+    background: rgb(25, 104, 23);
+}
+.noSelected {
+    padding: 0px 10px;
+    margin: 5px;
+    border: 1px solid rgb(157, 196, 17);
+    border-radius: 20%;
+    cursor: pointer;
+    background: rgb(157, 196, 17);
+}
+.top {
+    margin-bottom: 20px;
 }
