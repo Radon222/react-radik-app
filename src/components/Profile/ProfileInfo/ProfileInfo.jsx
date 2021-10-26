@@ -5,7 +5,6 @@ import jobTrue from '../../../assets/imeges/jobTrue.png';
 import jobFalse from '../../../assets/imeges/jobFalse.png';
 import userPhoto from '../../../assets/imeges/userPhoto.png';
 
-
 const ProfileInfo = props => {
   if (!props.profile) {
     return <Preloader />;
@@ -21,11 +20,33 @@ const ProfileInfo = props => {
       </div>
       <div className={classes.descriptionBlock}>
         <div>
-          <div>Status: {props.profile.aboutMe ? props.profile.aboutMe : 'status no'}</div>
-          <img className={classes.userPhoto} alt='123' src={props.profile.photos.large ? props.profile.photos.large : userPhoto} />
+          <h2>{props.profile.fullName}</h2>
+          <h4>About me: {props.profile.aboutMe}</h4>
+          <div>
+            Status:{' '}
+            {props.profile.aboutMe ? props.profile.aboutMe : 'status no'}
+          </div>
+          <img
+            className={classes.userPhoto}
+            alt='123'
+            src={
+              props.profile.photos.large
+                ? props.profile.photos.large
+                : userPhoto
+            }
+          />
         </div>
         <div>
-          <h3>My contacts:</h3>
+          <h3>
+            {(props.profile.contacts.facebook ||
+            props.profile.contacts.vk ||
+            props.profile.contacts.twitter ||
+            props.profile.contacts.instagram ||
+            props.profile.contacts.youtube ||
+            props.profile.contacts.github)
+              ? 'My contacts:'
+              : 'No contacts'}
+          </h3>
           <div>{props.profile.contacts.facebook}</div>
           <div>{props.profile.contacts.vk}</div>
           <div>{props.profile.contacts.twitter}</div>
@@ -37,6 +58,11 @@ const ProfileInfo = props => {
               alt='123'
               src={props.profile.lookingForAJob ? jobTrue : jobFalse}
             />
+          </div>
+          <div>
+            {props.profile.lookingForAJobDescription
+              ? props.profile.lookingForAJobDescription
+              : 'Not to offer a job'}
           </div>
         </div>
       </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/imeges/user.png';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 
 let Users = props => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -50,23 +49,7 @@ let Users = props => {
                 <button
                   disabled={props.disabledProgress.some(id => id === user.id)}
                   onClick={() => {
-                    props.toogleISdisabledProgress(true, user.id);
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            'API-KEY': 'a8c0b1e7-7074-4af2-bb10-5fb36841f16b',
-                          },
-                        }
-                      )
-                      .then(response => {
-                        if (response.data.resultCode === 0) {
-                          props.unFollow(user.id);
-                        }
-                        props.toogleISdisabledProgress(false, user.id);
-                      });
+                    props.unFollow(user.id);
                   }}
                 >
                   Unfollow
@@ -75,24 +58,7 @@ let Users = props => {
                 <button
                   disabled={props.disabledProgress.some(id => id === user.id)}
                   onClick={() => {
-                    props.toogleISdisabledProgress(true, user.id);
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            'API-KEY': 'a8c0b1e7-7074-4af2-bb10-5fb36841f16b',
-                          },
-                        }
-                      )
-                      .then(response => {
-                        if (response.data.resultCode === 0) {
-                          props.follow(user.id);
-                        }
-                        props.toogleISdisabledProgress(false, user.id);
-                      });
+                    props.follow(user.id);
                   }}
                 >
                   Follow
