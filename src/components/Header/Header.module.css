@@ -14,3 +14,11 @@
      margin: auto;
      border-radius: 25%;     
 }
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+}

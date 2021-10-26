@@ -3,5 +3,19 @@
      height: 100px;
 }
 .descriptionBlock {
+     display: flex;
      padding: 10px;
+     justify-content: space-around;
+}
+
+.job img {
+     width: 150px;
+}
+
+.job {
+     margin: 10px;
+}
+
+.userPhoto {
+     width: 200px;
 }
