@@ -4,6 +4,7 @@ import classes from './ProfileInfo.module.css';
 import jobTrue from '../../../assets/imeges/jobTrue.png';
 import jobFalse from '../../../assets/imeges/jobFalse.png';
 import userPhoto from '../../../assets/imeges/userPhoto.png';
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = props => {
   if (!props.profile) {
@@ -11,21 +12,17 @@ const ProfileInfo = props => {
   }
   return (
     <div>
-      <div>
+      {/* <div>
         <img
           className={classes.img}
           alt='234'
           src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKCPDuNaukD8ipmkQrrl0b0Lk-I2k-_Ogfmg&usqp=CAU'
         />
-      </div>
+      </div> */}
       <div className={classes.descriptionBlock}>
         <div>
           <h2>{props.profile.fullName}</h2>
-          <h4>About me: {props.profile.aboutMe}</h4>
-          <div>
-            Status:{' '}
-            {props.profile.aboutMe ? props.profile.aboutMe : 'status no'}
-          </div>
+          <h4>About me:  {props.profile.aboutMe ? props.profile.aboutMe : 'no information'}</h4>
           <img
             className={classes.userPhoto}
             alt='123'
@@ -35,15 +32,16 @@ const ProfileInfo = props => {
                 : userPhoto
             }
           />
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         </div>
         <div>
           <h3>
-            {(props.profile.contacts.facebook ||
+            {props.profile.contacts.facebook ||
             props.profile.contacts.vk ||
             props.profile.contacts.twitter ||
             props.profile.contacts.instagram ||
             props.profile.contacts.youtube ||
-            props.profile.contacts.github)
+            props.profile.contacts.github
               ? 'My contacts:'
               : 'No contacts'}
           </h3>
