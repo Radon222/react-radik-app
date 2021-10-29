@@ -10,7 +10,11 @@ const Header = props => {
         src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeEA9kk11Kv2RUzcmUxlTzHIVY7S5mdA0PFA&usqp=CAU'
       />
       <div className={classes.loginBlock}>
-        {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+        {props.isAuth ? (
+          <div>{props.login}-<button onClick={props.logout}>Logout</button></div>
+        ) : (
+          <NavLink to={'/login'}>Login</NavLink>
+        )}
       </div>
     </header>
   );
