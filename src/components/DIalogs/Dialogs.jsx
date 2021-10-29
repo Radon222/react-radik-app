@@ -2,8 +2,17 @@ import React from 'react';
 import DialogItem from './DialogItem/DialogItem';
 import classes from './Dialogs.module.css';
 import Message from './Message/Message';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Formik, Form } from 'formik';
+import { TextField } from '../Login/TextField'
+import * as Yup from 'yup';
 
 const Dialogs = props => {
+  const validate = Yup.object({
+    message: Yup.string()
+      .max(30, 'Максимум 30 символов!')
+      .required()
+  });
   let state = props.dialogsPage;
 
   let dialogsElements = state.dialogs.map(el => (
@@ -14,15 +23,8 @@ const Dialogs = props => {
     <Message key={el.id} message={el.message} />
   ));
 
-  let newMessageBody = state.newMessageBody;
-
-  let onSendMessageClick = () => {
-    props.sendMessage();
-  };
-
-  let onNewMessageChange = event => {
-    let body = event.target.value;
-    props.updateNewMessageBody(body);
+  let onSendMessage = (values) => {
+    props.sendMessage(values.message);
   };
 
   return (
@@ -31,17 +33,28 @@ const Dialogs = props => {
       <div className={classes.messages}>
         <div>{messagesElements}</div>
         <div>
-          <div>
-            <textarea
-              className={classes.textarea}
-              onChange={onNewMessageChange}
-              value={newMessageBody}
-              placeholder='Enter your message'
-            />
+        <Formik
+        initialValues={{
+          message: '',
+        }}
+        validationSchema={validate}
+        onSubmit={onSendMessage}
+      >
+        {() => (
+          <div className='container mt-3'>
+            <h1 className='my-4 font-weight-bold display-6'>Add message</h1>
+            <Form>
+              <TextField label='Message' name='message' type='textarea' />
+              <button className='btn btn-dark mt-3' type='submit'>
+                Send message
+              </button>
+              <button className='btn btn-danger mt-3 ml-3' type='reset'>
+                Reset
+              </button>
+            </Form>
           </div>
-          <div>
-            <button onClick={onSendMessageClick}>Send</button>
-          </div>
+        )}
+      </Formik>
         </div>
       </div>
     </div>
