@@ -11,8 +11,9 @@ const MyPosts = props => {
     <Post key={el.id} message={el.message} likesCount={el.likesCount} />
   ));
 
-  let onAddPost = values => {
+  let onAddPost = (values, onSubmitProps) => {
     props.addPost(values.post);
+    onSubmitProps.resetForm();
   };
   const validate = Yup.object({
     post: Yup.string().max(30, 'Максимум 30 символов!'),
@@ -28,18 +29,18 @@ const MyPosts = props => {
         validationSchema={validate}
         onSubmit={onAddPost}
       >
-        {({ dirty, isValid }) => (
+        {(formik) => (
           <div>
             <Form>
               <TextField label='Add post' name='post' type='textarea' />
               <button
                 className='btn btn-dark mt-3'
                 type='submit'
-                disabled={!dirty || !isValid}
+                disabled={!formik.dirty || !formik.isValid}
               >
                 Add post
               </button>
-              <button className='btn btn-danger mt-3 ms-3' type='reset'>
+              <button className='btn btn-danger mt-3 ms-3' type='reset' disabled={formik.isSubmitting || !formik.dirty}>
                 Reset
               </button>
             </Form>

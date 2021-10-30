@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 
 const Dialogs = props => {
   const validate = Yup.object({
-    message: Yup.string().max(30, 'Максимум 30 символов!').required(),
+    message: Yup.string().max(30, 'Максимум 30 символов!'),
   });
   let state = props.dialogsPage;
 
@@ -21,8 +21,9 @@ const Dialogs = props => {
     <Message key={el.id} message={el.message} />
   ));
 
-  let onSendMessage = values => {
+  let onSendMessage = (values, onSubmitProps) => {
     props.sendMessage(values.message);
+    onSubmitProps.resetForm();
   };
 
   return (
@@ -38,7 +39,7 @@ const Dialogs = props => {
             validationSchema={validate}
             onSubmit={onSendMessage}
           >
-            {({ dirty, isValid }) => {
+            {(formik) => {
               return (
                 <div className='container mt-3'>
                   <h1 className='my-4 font-weight-bold display-6'>
@@ -49,11 +50,15 @@ const Dialogs = props => {
                     <button
                       className='btn btn-dark mt-3'
                       type='submit'
-                      disabled={!dirty || !isValid}
+                      disabled={!formik.dirty || !formik.isValid}
                     >
                       Send message
                     </button>
-                    <button className='btn btn-danger mt-3 ms-3' type='reset'>
+                    <button
+                      className='btn btn-danger mt-3 ms-3'
+                      type='reset'
+                      disabled={formik.isSubmitting || !formik.dirty}
+                    >
                       Reset
                     </button>
                   </Form>
