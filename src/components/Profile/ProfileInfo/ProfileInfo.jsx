@@ -4,7 +4,7 @@ import classes from './ProfileInfo.module.css';
 import jobTrue from '../../../assets/imeges/jobTrue.png';
 import jobFalse from '../../../assets/imeges/jobFalse.png';
 import userPhoto from '../../../assets/imeges/userPhoto.png';
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = props => {
   if (!props.profile) {
@@ -32,7 +32,7 @@ const ProfileInfo = props => {
                 : userPhoto
             }
           />
-          <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
         </div>
         <div>
           <h3>
