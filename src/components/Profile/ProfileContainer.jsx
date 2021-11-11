@@ -26,6 +26,7 @@ class ProfileContainer extends React.Component {
         profile={this.props.profile}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        logUserId={this.props.logUserId}
       />
     );
   }
@@ -34,7 +35,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = state => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
-  logUserId: state.auth.userId
+  logUserId: state.auth.userId,
 });
 
 export default compose(

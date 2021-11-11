@@ -22,7 +22,10 @@ const ProfileInfo = props => {
       <div className={classes.descriptionBlock}>
         <div>
           <h2>{props.profile.fullName}</h2>
-          <h4>About me:  {props.profile.aboutMe ? props.profile.aboutMe : 'no information'}</h4>
+          <h4>
+            About me:{' '}
+            {props.profile.aboutMe ? props.profile.aboutMe : 'no information'}
+          </h4>
           <img
             className={classes.userPhoto}
             alt='123'
@@ -32,7 +35,14 @@ const ProfileInfo = props => {
                 : userPhoto
             }
           />
-          <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+          {props.logUserId !== props.profile.userId ? (
+            <div>{props.profile.aboutMe}</div>
+          ) : (
+            <ProfileStatusWithHooks
+              status={props.status}
+              updateStatus={props.updateStatus}
+            />
+          )}
         </div>
         <div>
           <h3>

@@ -20,7 +20,7 @@ import {
   getDisabledProgress,
 } from '../../redux/users-selectors';
 
-class UsersContainer extends React.Component {
+class UsersContainer extends React.PureComponent {
   componentDidMount() {
     this.props.requestUsers(this.props.currentPage, this.props.pageSize);
   }
@@ -29,6 +29,7 @@ class UsersContainer extends React.Component {
   };
 
   render() {
+    console.log('RENDER USERS');
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}

@@ -6,10 +6,12 @@ import { Formik, Form } from 'formik';
 import { TextField } from '../../Login/TextField';
 import * as Yup from 'yup';
 
-const MyPosts = props => {
-  let postsElements = props.posts.map(el => (
-    <Post key={el.id} message={el.message} likesCount={el.likesCount} />
-  ));
+const MyPosts = React.memo(props => {
+  let postsElements = props.posts
+    .map(el => (
+      <Post key={el.id} message={el.message} likesCount={el.likesCount} />
+    ))
+    .reverse();
 
   let onAddPost = (values, onSubmitProps) => {
     props.addPost(values.post);
@@ -29,7 +31,7 @@ const MyPosts = props => {
         validationSchema={validate}
         onSubmit={onAddPost}
       >
-        {(formik) => (
+        {formik => (
           <div>
             <Form>
               <TextField label='Add post' name='post' type='textarea' />
@@ -40,7 +42,11 @@ const MyPosts = props => {
               >
                 Add post
               </button>
-              <button className='btn btn-danger mt-3 ms-3' type='reset' disabled={formik.isSubmitting || !formik.dirty}>
+              <button
+                className='btn btn-danger mt-3 ms-3'
+                type='reset'
+                disabled={formik.isSubmitting || !formik.dirty}
+              >
                 Reset
               </button>
             </Form>
@@ -50,6 +56,6 @@ const MyPosts = props => {
       <div className={classes.posts}>{postsElements}</div>
     </div>
   );
-};
+});
 
 export default MyPosts;

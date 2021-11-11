@@ -1,4 +1,4 @@
-import { profileAPI, usersAPI } from '../api/api';
+import { profileAPI } from '../api/api';
 
 const ADD_POST = 'ADD_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -23,7 +23,7 @@ const profileReducer = (state = initialState, action) => {
       };
       return {
         ...state,
-        posts: [...state.posts, newPost]
+        posts: [...state.posts, newPost],
       };
     case SET_USER_PROFILE:
       return {
@@ -40,7 +40,7 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostAC = (message) => ({ type: ADD_POST, payload: message });
+export const addPostAC = message => ({ type: ADD_POST, payload: message });
 const setUserProfile = profile => ({
   type: SET_USER_PROFILE,
   payload: profile,
@@ -51,7 +51,7 @@ const setStatus = status => ({
 });
 export const getUserProfile = userId => {
   return dispatch => {
-    usersAPI.getProfile(userId).then(response => {
+    profileAPI.getProfile(userId).then(response => {
       dispatch(setUserProfile(response.data));
     });
   };
