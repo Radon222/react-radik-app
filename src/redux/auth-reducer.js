@@ -1,6 +1,6 @@
 import { authAPI } from '../api/api';
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'radon4ik/auth/SET_USER_DATA';
 const LOGIN_ERROR = 'LOGIN_ERROR';
 
 let initialState = {
@@ -38,33 +38,30 @@ export const loginError = message => ({
   payload: message,
 });
 
-export const getAuthUserData = () => dispatch => {
-  return authAPI.me().then(response => {
-    if (response.data.resultCode === 0) {
-      let { id, login, email } = response.data.data;
-      dispatch(setAuthUserData(id, email, login, true, null));
-    }
-  });
+export const getAuthUserData = () => async dispatch => {
+  let response = await authAPI.me();
+  if (response.data.resultCode === 0) {
+    let { id, login, email } = response.data.data;
+    dispatch(setAuthUserData(id, email, login, true, null));
+  }
 };
 
-export const login = (email, password, rememberMe) => dispatch => {
-  authAPI.login(email, password, rememberMe).then(response => {
-    if (response.data.resultCode === 0) {
-      dispatch(getAuthUserData());
-    }
-    if (response.data.resultCode !== 0) {
-      let message = response.data.messages[0];
-      dispatch(loginError(message));
-    }
-  });
+export const login = (email, password, rememberMe) => async dispatch => {
+  let response = await authAPI.login(email, password, rememberMe);
+  if (response.data.resultCode === 0) {
+    dispatch(getAuthUserData());
+  }
+  if (response.data.resultCode !== 0) {
+    let message = response.data.messages[0];
+    dispatch(loginError(message));
+  }
 };
 
-export const logout = () => dispatch => {
-  authAPI.logout().then(response => {
-    if (response.data.resultCode === 0) {
-      dispatch(setAuthUserData(null, null, null, false, null));
-    }
-  });
+export const logout = () => async dispatch => {
+  let response = await authAPI.logout();
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthUserData(null, null, null, false, null));
+  }
 };
 
 export default authReducer;

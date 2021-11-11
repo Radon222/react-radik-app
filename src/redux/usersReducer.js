@@ -91,40 +91,31 @@ export const toogleISdisabledProgress = (isFetching, userId) => ({
   payload: { isFetching, userId },
 });
 
-export const requestUsers = (page, pageSize) => {
-  return dispatch => {
-    dispatch(toggleIsFetching(true));      
-    dispatch(setCurrentPage(page));
-    usersAPI.getUsers(page, pageSize).then(data => {
-      dispatch(toggleIsFetching(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+export const requestUsers = (page, pageSize) => async dispatch => {
+  dispatch(toggleIsFetching(true));
+  dispatch(setCurrentPage(page));
+  let data = await usersAPI.getUsers(page, pageSize);
+  dispatch(toggleIsFetching(false));
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsersCount(data.totalCount));
 };
 
-export const follow = userId => {
-  return dispatch => {
-    dispatch(toogleISdisabledProgress(true, userId));
-    usersAPI.follow(userId).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(followSucces(userId));
-      }
-      dispatch(toogleISdisabledProgress(false, userId));
-    });
-  };
+export const follow = userId => async dispatch => {
+  dispatch(toogleISdisabledProgress(true, userId));
+  let response = await usersAPI.follow(userId);
+  if (response.data.resultCode === 0) {
+    dispatch(followSucces(userId));
+  }
+  dispatch(toogleISdisabledProgress(false, userId));
 };
 
-export const unFollow = userId => {
-  return dispatch => {
-    dispatch(toogleISdisabledProgress(true, userId));
-    usersAPI.unFollow(userId).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(unFollowSucces(userId));
-      }
-      dispatch(toogleISdisabledProgress(false, userId));
-    });
-  };
+export const unFollow = userId => async dispatch => {
+  dispatch(toogleISdisabledProgress(true, userId));
+  let response = await usersAPI.unFollow(userId);
+  if (response.data.resultCode === 0) {
+    dispatch(unFollowSucces(userId));
+  }
+  dispatch(toogleISdisabledProgress(false, userId));
 };
 
 export default usersReducer;
