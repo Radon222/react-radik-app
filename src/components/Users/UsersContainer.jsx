@@ -29,7 +29,6 @@ class UsersContainer extends React.PureComponent {
   };
 
   render() {
-    console.log('RENDER USERS');
     return (
       <>
         {this.props.isFetching ? <Preloader /> : null}

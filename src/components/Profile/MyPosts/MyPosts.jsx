@@ -7,11 +7,11 @@ import { TextField } from '../../Login/TextField';
 import * as Yup from 'yup';
 
 const MyPosts = React.memo(props => {
-  let postsElements = props.posts
+  let postsElements = [...props.posts]
+    .reverse()
     .map(el => (
       <Post key={el.id} message={el.message} likesCount={el.likesCount} />
-    ))
-    .reverse();
+    ));
 
   let onAddPost = (values, onSubmitProps) => {
     props.addPost(values.post);
