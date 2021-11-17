@@ -29,7 +29,7 @@ const ProfileInfo = props => {
             }
           />
           {props.logUserId !== props.profile.userId ? (
-            <div>{props.profile.aboutMe}</div>
+            <div>{props.status}</div>
           ) : (
             <ProfileStatusWithHooks
               status={props.status}

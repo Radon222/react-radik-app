@@ -40,7 +40,7 @@ let User = ({ user, disabledProgress, unFollow, follow }) => {
       </div>
       <div>
         <div>{user.name}</div>
-        <div>{user.status}</div>
+        <div>{user.id}</div>
       </div>
       <div>
         <div>{'user.location.country'}</div>

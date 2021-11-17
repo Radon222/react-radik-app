@@ -33,17 +33,20 @@ class UsersContainer extends React.PureComponent {
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : null}
-        <Users
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          onPageChanged={this.onPageChanged}
-          users={this.props.users}
-          follow={this.props.follow}
-          unFollow={this.props.unFollow}
-          disabledProgress={this.props.disabledProgress}
-        />
+        {this.props.isFetching ? (
+          <Preloader />
+        ) : (
+          <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            users={this.props.users}
+            follow={this.props.follow}
+            unFollow={this.props.unFollow}
+            disabledProgress={this.props.disabledProgress}
+          />
+        )}
       </>
     );
   }

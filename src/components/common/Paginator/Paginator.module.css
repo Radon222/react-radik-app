@@ -1,5 +1,6 @@
 
 .selectedPage {
+    width: 50px;
     font-weight: bold;
     padding: 0px 10px;
     margin: 5px;
@@ -9,6 +10,7 @@
     background: rgb(25, 104, 23);
 }
 .noSelected {
+    width: 50px;
     padding: 0px 10px;
     margin: 5px;
     border: 1px solid rgb(157, 196, 17);
@@ -17,5 +19,7 @@
     background: rgb(157, 196, 17);
 }
 .top {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 20px;
 }
